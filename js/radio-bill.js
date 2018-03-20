@@ -10,3 +10,7 @@
 // * add the appropriate value to the running total
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen
+
+
+var itemTypeBtn = document.querySelector(".billItemTypeRadio");
+var billAddBtn = document.querySelector(".radioBillAddBtn");
