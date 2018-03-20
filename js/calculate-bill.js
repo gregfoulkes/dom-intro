@@ -1,8 +1,10 @@
+
 var billStringElement = document.querySelector(".billString");
 var calculateBtnElement = document.querySelector(".calculateBtn");
 var billTotalElement = document.querySelector(".billTotal");
 
-calculateBtn.addEventListener('click', calculateBtnClicked(billStringElement){
+
+function calculateBtnClicked(billStringElement){
 
     // get the string entered in the textArea
     var billString = billStringField.value;
@@ -25,10 +27,9 @@ calculateBtn.addEventListener('click', calculateBtnClicked(billStringElement){
     var roundedBillTotal = billTotal.toFixed(2);
     billTotalElement.innerHTML = roundedBillTotal;
 //return roundBillTotal
-});
+}
 
-
-
+calculateBtn.addEventListener('click', (calculateBtnClicked));
 //calculateBtn.addEventListener('click', calculateBtnClicked);
 
 //get a reference to the calculate button
