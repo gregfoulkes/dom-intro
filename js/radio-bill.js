@@ -12,44 +12,47 @@
 // * display the latest total on the screen
 
 
-var itemTypeBtn = document.querySelector(".billItemTypeRadio");
+var billItemType = document.querySelector(".billItemTypeRadio");
 var billAddBtn = document.querySelector(".radioBillAddBtn");
+var callsTotalTwo = document.querySelector(".callTotalTwo");
+var smsTotalTwo = document.querySelector(".smsTotalTwo");
+var totalCostTwo = document.querySelector(".totalTwo");
 
-//var billStringField = document.querySelector(".billString");
-//var calculateBtnElement = document.querySelector(".calculateBtn");
-//var billTotalElement = document.querySelector(".billTotal");
-
-
-
-function calculateBtnClicked(){
-    // get the string entered in the textArea
-    var billString = itemTypeBtn.value;
-    //split the string
-    var billItems = billString.split(",");
-    // a variable for the total phone bill.
-    var billTotal = 0;
-    //loop over all the bill items
-    for (var i=0;i<billItems.length;i++){
-        var billItem = billItems[i].trim();
-        if (billItem === "call"){
-            billTotal += 2.75;
-        }
-        else if (billItem === "sms"){
-            billTotal += 0.75;
-        }
-
-        else{
-
-          biilTotal += 0
-        }
+var callsTotal = 0;
+var smsTotal = 0;
 
 
+
+function textBillTotal(){
+    // get the value entered in the billType textfield
+    //var billTypeEntered = billItemType.value.trim();
+    // update the correct total
+    var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+    if (checkedRadioBtn){
+      var billItemType = checkedRadioBtn.value
+        // billItemType will be 'call' or 'sms'
+    }
+    if (billItemType === "call"){
+        callsTotal += 2.75
+    }
+    else if (billItemType === "sms"){
+        smsTotal += 0.75;
     }
 
-    //round to two decimals
-    var roundedBillTotal = billTotal.toFixed(2);
-    billTotalElement.innerHTML = roundedBillTotal;
-}
+    //update the totals that is displayed on the screen.
+    callsTotalTwo.innerHTML = callsTotal.toFixed(2);
+    smsTotalTwo.innerHTML = smsTotal.toFixed(2);
+    var totalCost = callsTotal + smsTotal;
+    totalCostTwo.innerHTML = totalCost.toFixed(2);
 
-//calculateBtnElement.addEventListener('click', (calculateBtnClicked));
-billAddBtn.addEventListener('click', (calculateBtnClicked));
+
+   //color the total based on the criteria
+   if (totalCost >= 50){
+       // adding the danger class will make the text red
+       totalCostElem.classList.add("danger");
+   }
+   else if (totalCost >= 30){
+       totalCostElem.classList.add("warning");
+   }
+}
+billAddBtn.addEventListener('click', (textBillTotal));
