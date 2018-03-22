@@ -18,6 +18,7 @@ var smsTotalElem = document.querySelector(".smsTotalOne");
 var totalCostElem = document.querySelector(".totalOne");
 var textBillBtn = document.querySelector(".textBillAddBtn")
 
+
 var callsTotal = 0;
 var smsTotal = 0;
 
