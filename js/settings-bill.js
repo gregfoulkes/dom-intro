@@ -36,9 +36,45 @@ var criticalLevel = document.querySelector(".criticalLevelSetting")
 var updateSetButton = document.querySelector(".updateSettings")
 var billAddTotalBtn = document.querySelector(".addTotalBillBtn")
 
-var callsTotals = 0;
-var smsTotals = 0;
+var totalCalls = 0;
+var totalSms = 0;
+
+var callValue = 0;
+var smsValue = 0;
+
+var warnLevel = 0;
+var critLevel = 0;
+
+var costTotal = totalCalls + totalSms;
+
 //var totalCost = 0;
+
+function updateSet(){
+  var updateCall = callCost.value
+  var updateSms = smsCost.value
+  var updateWarn = warningLevel.value
+  var updateCrit = criticalLevel.value
+
+  if (callCost != ""){
+    callValue = parseFloat(updateCall)
+    console.log(callValue)
+  }
+  if (smsCost != ""){
+    smsValue = parseFloat(updateSms)
+    console.log(smsValue)
+  }
+  if (warningLevel != ""){
+    warnLevel = parseFloat(updateWarn)
+    console.log(warnLevel)
+
+  }
+  if (criticalLevel != ""){
+    critLevel = parseFloat(updateCrit)
+    console.log(critLevel)
+
+  }
+
+}
 
 function setBillTotal(){
     // get the value entered in the billType textfield
@@ -47,34 +83,38 @@ function setBillTotal(){
     var checkedRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
     if (checkedRadioBtn){
     var billItemTypeSet = checkedRadioBtn.value
-  //  console.log(billItemTypeSet);
 
         // billItemType will be 'call' or 'sms'
     if (billItemTypeSet === "call"){
-      //  callsCost += 2.75
-      callCost = 3 * 2.75//callCost * 2.75
-        console.log(callsTotals);
+      totalCalls += callValue //* 2.75//callCost * 2.75
 
     }
-    /*
+
     else if (billItemTypeSet === "sms"){
-       smsCost * 0.75;
-    }*/
-    }
-    callsTotalSet.innerHTML = callCost.toFixed(2);
-  //  smsTotalSet.innerHTML = smsCost.toFixed(2);
-    var totalCosts = callCost + 0;
-    totalCostSet.innerHTML = totalCosts.toFixed(2);
+       totalSms +=  smsValue;
 
-    if (totalCostSet >= criticalLevel){
-        // adding the danger class will make the text red
-        totalCostSet.classList.add("danger");
+      }
+
     }
-    else if (totalCostSet >= warningLevel){
+
+    callsTotalSet.innerHTML = totalCalls.toFixed(2);
+    smsTotalSet.innerHTML = totalSms.toFixed(2);
+    var costTotal = totalCalls + totalSms;
+    totalCostSet.innerHTML = costTotal.toFixed(2);
+
+    if (costTotal >= warnLevel){
         totalCostSet.classList.add("warning");
     }
 
+    if (costTotal >= critLevel){
+        // adding the danger class will make the text red
+        totalCostSet.classList.add("danger");
+    }
+
+
 }
 
+
+
  billAddTotalBtn.addEventListener('click', setBillTotal);
- updateSetButton.addEventListener('click', setBillTotal)
+ updateSetButton.addEventListener('click', updateSet)

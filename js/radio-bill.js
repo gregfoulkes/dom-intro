@@ -49,10 +49,10 @@ function textBillTotal(){
    //color the total based on the criteria
    if (totalCost >= 50){
        // adding the danger class will make the text red
-       totalCostElem.classList.add("danger");
+       totalCostTwo.classList.add("danger");
    }
    else if (totalCost >= 30){
-       totalCostElem.classList.add("warning");
+       totalCostTwo.classList.add("warning");
    }
 }
 billAddBtn.addEventListener('click', (textBillTotal));
