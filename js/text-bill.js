@@ -6,11 +6,17 @@ var smsTotalElem = document.querySelector(".smsTotalOne");
 var totalCostElem = document.querySelector(".totalOne");
 var textBillBtn = document.querySelector(".textBillAddBtn")
 
-
-var callsTotals = 0;
+var  callsTotals = 0;
 var smsTotals = 0;
 
 
+//var = function valueType(callsTotals, smsTotals){
+
+//  return{
+//    callsTotals: 0;
+//    smsTotals: 0;
+//  }
+//}
 //var totalCosts = callsTotals + smsTotals;
 
 function valueType(){
@@ -18,11 +24,12 @@ function valueType(){
 }
 //console.log(valueType())
 
-function textBillTotal(){
+function textBillTotal(value){
 
-    var billTypeEntered = valueType();
+    var billTypeEntered = value;
     if (billTypeEntered === "call"){
         callsTotals += 2.75
+
     }
     if (billTypeEntered === "sms"){
         smsTotals += 0.75;
@@ -36,6 +43,7 @@ function textBillTotal(){
     }
     var totalCosts = callsTotals + smsTotals;
     return totalCosts
+
 }
 
 function billAddTotal(){
@@ -54,13 +62,24 @@ function billAddTotal(){
    else if (totalCosts >= 30){
        totalCostElem.classList.add("warning");
    }
+
 }
 
 
-billBtn.addEventListener('click', (valueType));
-billBtn.addEventListener('click', (textBillTotal));
-billBtn.addEventListener('click', (billAddTotal));
+billBtn.addEventListener('click', function(){
 
+  textBillTotal(valueType());
+  billAddTotal();
+  doClear();
+  //
+});
+
+
+
+function doClear(){
+
+return billTypeText.value = '';
+}
 
 /*
 function clearBillTotal(){
