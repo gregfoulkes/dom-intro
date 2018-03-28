@@ -26,29 +26,38 @@ var critLevel = 0;
 
 var costTotal = totalCalls + totalSms;
 
+callCost.value = 0
+smsCost.value = 0
+
 function updateSet(){
+
+
+
   var updateCall = callCost.value
   var updateSms = smsCost.value
   var updateWarn = warningLevel.value
   var updateCrit = criticalLevel.value
 
+
   if (callCost != ""){
     callValue = parseFloat(updateCall)
     console.log(callValue)
+
   }
+
   if (smsCost != ""){
     smsValue = parseFloat(updateSms)
     console.log(smsValue)
   }
+
   if (warningLevel != ""){
     warnLevel = parseFloat(updateWarn)
     console.log(warnLevel)
-
   }
+
   if (criticalLevel != ""){
     critLevel = parseFloat(updateCrit)
     console.log(critLevel)
-
   }
 
 }
@@ -75,11 +84,12 @@ function setBillTotal(){
     var costTotal = totalCalls + totalSms;
     totalCostSet.innerHTML = costTotal.toFixed(2);
 
-    if (costTotal >= warnLevel){
+    if (costTotal > warnLevel){
         totalCostSet.classList.add("warning");
     }
 
-    if (costTotal >= critLevel){
+
+    if (costTotal > critLevel){
         totalCostSet.classList.add("danger");
     }
 
@@ -87,6 +97,6 @@ function setBillTotal(){
 }
 
 
-
  billAddTotalBtn.addEventListener('click', setBillTotal);
+
  updateSetButton.addEventListener('click', updateSet)

@@ -11,9 +11,9 @@ var smsTotal = 0;
 
 
 
-function textBillTotal(){
+function radioBillTotal(billItemType){
 
-    var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+  var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
     if (checkedRadioBtn){
       var billItemType = checkedRadioBtn.value
     }
@@ -37,4 +37,4 @@ function textBillTotal(){
        totalCostTwo.classList.add("warning");
    }
 }
-billAddBtn.addEventListener('click', (textBillTotal));
+billAddBtn.addEventListener('click', (radioBillTotal));

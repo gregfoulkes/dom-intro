@@ -10,20 +10,42 @@ var textBillBtn = document.querySelector(".textBillAddBtn")
 var callsTotals = 0;
 var smsTotals = 0;
 
+
+//var totalCosts = callsTotals + smsTotals;
+
+function valueType(){
+  return billTypeText.value.trim()
+}
+//console.log(valueType())
+
 function textBillTotal(){
 
-    var billTypeEntered = billTypeText.value.trim();
+    var billTypeEntered = valueType();
     if (billTypeEntered === "call"){
         callsTotals += 2.75
     }
-    else if (billTypeEntered === "sms"){
+    if (billTypeEntered === "sms"){
         smsTotals += 0.75;
     }
+
+    if (billTypeEntered === ""){
+      callsTotals = 0
+    }
+   if (billTypeEntered === ""){
+      smsTotals = 0
+    }
+    var totalCosts = callsTotals + smsTotals;
+    return totalCosts
+}
+
+function billAddTotal(){
 
     callsTotalElem.innerHTML = callsTotals.toFixed(2);
     smsTotalElem.innerHTML = smsTotals.toFixed(2);
     var totalCosts = callsTotals + smsTotals;
+    //var billAddedTotal = textBillTotal()
     totalCostElem.innerHTML = totalCosts.toFixed(2);
+    //totalCostElem.innerHTML = billAddedTotal.toFixed(2);
 
 
    if (totalCosts >= 50){
@@ -33,4 +55,25 @@ function textBillTotal(){
        totalCostElem.classList.add("warning");
    }
 }
+
+
+billBtn.addEventListener('click', (valueType));
 billBtn.addEventListener('click', (textBillTotal));
+billBtn.addEventListener('click', (billAddTotal));
+
+
+/*
+function clearBillTotal(){
+
+  if(billTypeEnetered === ""){
+    callsTotals = 0
+
+  }
+
+    if(billTypeEnetered === ""){
+      smsTotals = 0
+    }
+
+}
+billBtn.addEventListener('click', (clearBillTotal));
+*/
