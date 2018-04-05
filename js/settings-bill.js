@@ -15,88 +15,157 @@ var criticalLevel = document.querySelector(".criticalLevelSetting")
 var updateSetButton = document.querySelector(".updateSettings")
 var billAddTotalBtn = document.querySelector(".addTotalBillBtn")
 
-var totalCalls = 0;
-var totalSms = 0;
-
-var callValue = 0;
-var smsValue = 0;
-
-var warnLevel = 0;
-var critLevel = 0;
-
-var costTotal = totalCalls + totalSms;
-
-callCost.value = 0
-smsCost.value = 0
-
-function updateSet(){
+//callCost.value = 0
+//smsCost.value = 0
 
 
 
-  var updateCall = callCost.value
-  var updateSms = smsCost.value
-  var updateWarn = warningLevel.value
-  var updateCrit = criticalLevel.value
+function CheckTotal(){
+
+  var totalCalls = 0;
+  var totalSms = 0;
+
+  var callValue = 0;
+  var smsValue = 0;
+
+  var warnLevel = 0;
+  var critLevel = 0;
 
 
-  if (callCost != ""){
-    callValue = parseFloat(updateCall)
-    console.log(callValue)
-
+  function callUpdate(value){
+     callValue = parseFloat(value)
+      return callValue
   }
 
-  if (smsCost != ""){
-    smsValue = parseFloat(updateSms)
-    console.log(smsValue)
+  function smsUpdate(value){
+    smsValue = parseFloat(value)
+      return smsValue
   }
 
-  if (warningLevel != ""){
-    warnLevel = parseFloat(updateWarn)
-    console.log(warnLevel)
+  function warningLevelUpdate(value){
+          warnLevel = parseFloat(value)
+          return warnLevel
+        }
+  // function criticalLevelUpdate(){
+  //         critLevel = parseFloat(value)
+  //         return critLevel
+  //         }
+
+  function billItemCalculate (value){
+
+    if (value === "call"){
+      totalCalls += callValue
+    }
+
+    else if (value === "sms"){
+       totalSms +=  smsValue;
+
+      }
   }
 
-  if (criticalLevel != ""){
-    critLevel = parseFloat(updateCrit)
-    console.log(critLevel)
+
+  function allCalls(){
+    return totalCalls.toFixed(2)
   }
+
+  function allSms(){
+  return totalSms.toFixed(2)
+  }
+
+function totalFunction(){
+    var costTotal = totalCalls + totalSms;
+  return costTotal.toFixed(2);
+    }
+
+    return {
+      callSet: callUpdate,
+      smsSet: smsUpdate,
+      updateWarning: warningLevelUpdate,
+      // criticalUpdate: criticalLevelUpdate,
+      calculate: billItemCalculate,
+      call: allCalls,
+      sms: allSms,
+      total: totalFunction,
+    }
+  }
+
+
+var checkAll = CheckTotal();
+
+function UpdateSet(){
+
+   var updatedCall = callCost.value;
+   var updatedSms = smsCost.value;
+   var updateWarn = warningLevel.value
+   var updateCrit = criticalLevel.value
+   checkAll.callSet(updatedCall);
+   checkAll.smsSet(updatedSms);
+   checkAll.updateWarning(updateWarn);
+   // checkAll.criticalLevelUpdate(updateCrit);
+
 
 }
 
-function setBillTotal(){
+function checkBtnType(billItemTypeSet){
 
     var checkedRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
     if (checkedRadioBtn){
     var billItemTypeSet = checkedRadioBtn.value
 
-    if (billItemTypeSet === "call"){
-      totalCalls += callValue
     }
-
-    else if (billItemTypeSet === "sms"){
-       totalSms +=  smsValue;
-
-      }
-
-    }
-
-    callsTotalSet.innerHTML = totalCalls.toFixed(2);
-    smsTotalSet.innerHTML = totalSms.toFixed(2);
-    var costTotal = totalCalls + totalSms;
-    totalCostSet.innerHTML = costTotal.toFixed(2);
-
-    if (costTotal > warnLevel){
-        totalCostSet.classList.add("warning");
-    }
-
-
-    if (costTotal > critLevel){
-        totalCostSet.classList.add("danger");
-    }
-
-
+  return  billItemTypeSet
 }
 
+function totalDisplay(){
 
- billAddTotalBtn.addEventListener('click', setBillTotal);
 
- updateSetButton.addEventListener('click', updateSet)
+    callsTotalSet.innerHTML =  checkAll.call()
+    smsTotalSet.innerHTML =   checkAll.sms()
+  //  var totalAll = totalFunction();
+    totalCostSet.innerHTML =   checkAll.total()
+}
+
+function totalColourChange(){
+  var finalTotal = checkAll.total()
+  var warningValue = checkAll.updateWarning()
+  //var num = checkTotal.warningLevelUpdate(
+    if (finalTotal > warningValue){
+        totalCostSet.classList.add("warning");
+    }
+  }
+//
+//     if (costTotal > critLevel){
+//         totalCostSet.classList.add("danger");
+//     }
+// }
+
+
+billAddTotalBtn.addEventListener('click', function(){
+checkAll.calculate(checkBtnType());
+totalDisplay();
+totalColourChange();
+});
+
+updateSetButton.addEventListener('click', function(){
+UpdateSet();
+});
+
+ //updateSetButton.addEventListener('click', updateSet)
+
+ // function totalColourChange(){
+ //     if (costTotal > warnLevel){
+ //         totalCostSet.classList.add("warning");
+ //     }
+ //
+ //
+ //     if (costTotal > critLevel){
+ //         totalCostSet.classList.add("danger");
+ //     }
+ //
+ //
+ //
+ //
+ //
+ //        //
+ //
+ // }

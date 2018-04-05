@@ -1,98 +1,78 @@
-
 var billTypeText = document.querySelector(".billTypeText");
 var billBtn = document.querySelector(".addToBillBtn");
 var callsTotalElem = document.querySelector(".callTotalOne");
 var smsTotalElem = document.querySelector(".smsTotalOne");
 var totalCostElem = document.querySelector(".totalOne");
 var textBillBtn = document.querySelector(".textBillAddBtn")
+var checkSum = TotalCheck()
 
-var  callsTotals = 0;
-var smsTotals = 0;
-
-
-//var = function valueType(callsTotals, smsTotals){
-
-//  return{
-//    callsTotals: 0;
-//    smsTotals: 0;
-//  }
-//}
-//var totalCosts = callsTotals + smsTotals;
 
 function valueType(){
   return billTypeText.value.trim()
+ }
+
+
+function TotalCheck(){
+  var  callsTotals = 0;
+  var smsTotals = 0;
+
+
+function billCalculate(value){
+  if (value === 'call'){
+    callsTotals += 2.75;
+    console.log('call')
+  }
+  if (value === 'sms'){
+    smsTotals += 0.65;
+  }
+
 }
-//console.log(valueType())
 
-function textBillTotal(value){
+function callBill(value){
+   return callsTotals;
+}
 
-    var billTypeEntered = value;
-    if (billTypeEntered === "call"){
-        callsTotals += 2.75
+function smsBill(value){
+   return smsTotals;
+}
 
-    }
-    if (billTypeEntered === "sms"){
-        smsTotals += 0.75;
-    }
+function totalTextBill(value){
+  var  totalCosts = callsTotals + smsTotals;
+  return totalCosts;
+}
 
-    if (billTypeEntered === ""){
-      callsTotals = 0
-    }
-   if (billTypeEntered === ""){
-      smsTotals = 0
-    }
-    var totalCosts = callsTotals + smsTotals;
-    return totalCosts
-
+return {
+  calculate:  billCalculate,
+  callTotal: callBill,
+  smsTotal: smsBill,
+  total: totalTextBill
+  };
 }
 
 function billAddTotal(){
+    callsTotalElem.innerHTML =checkSum.callTotal().toFixed(2);
+    smsTotalElem.innerHTML = checkSum.smsTotal().toFixed(2);
+    totalCostElem.innerHTML = checkSum.total().toFixed(2);
+}
 
-    callsTotalElem.innerHTML = callsTotals.toFixed(2);
-    smsTotalElem.innerHTML = smsTotals.toFixed(2);
-    var totalCosts = callsTotals + smsTotals;
-    //var billAddedTotal = textBillTotal()
-    totalCostElem.innerHTML = totalCosts.toFixed(2);
-    //totalCostElem.innerHTML = billAddedTotal.toFixed(2);
-
-
-   if (totalCosts >= 50){
+function colorChange(){
+   if (check.total() >= 50){
        totalCostElem.classList.add("danger");
    }
-   else if (totalCosts >= 30){
+   else if (check.total() >= 30){
        totalCostElem.classList.add("warning");
    }
 
 }
 
-
-billBtn.addEventListener('click', function(){
-
-  textBillTotal(valueType());
-  billAddTotal();
-  doClear();
-  //
-});
-
-
-
 function doClear(){
-
 return billTypeText.value = '';
 }
 
-/*
-function clearBillTotal(){
+billBtn.addEventListener('click', function(){
 
-  if(billTypeEnetered === ""){
-    callsTotals = 0
-
-  }
-
-    if(billTypeEnetered === ""){
-      smsTotals = 0
-    }
-
-}
-billBtn.addEventListener('click', (clearBillTotal));
-*/
+  checkSum.calculate(valueType());
+  billAddTotal();
+  colorChange();
+  doClear();
+ });
