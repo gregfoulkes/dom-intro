@@ -3,58 +3,75 @@ var billStringField = document.querySelector(".billString");
 var calculateBtnElement = document.querySelector(".calculateBtn");
 var billTotalElement = document.querySelector(".billTotal");
 
+var thePhoneBill = totalPhoneBill();
 
-/*
-function calculateBtnClicked(){
-
-    var billString = billStringField.value;
-
-    var billItems = billString.split(",");
-
-    var billTotal = 0;
-
-    for (var i=0;i<billItems.length;i++){
-        var billItem = billItems[i].trim();
-        if (billItem === "call"){
-            billTotal += 2.75;
-        }
-        else if (billItem === "sms"){
-            billTotal += 0.75;
-        }
-    }
-
-    var roundedBillTotal = billTotal.toFixed(2);
-    billTotalElement.innerHTML = roundedBillTotal;
+function stringType(){
+  var billText = billStringField.value
+  return billText
 }
-*/
-function totalPhoneBill(billStringField){
+
+function totalPhoneBill(){
   var total = 0;
   var call = 0
   var sms = 0
-  var billString = billStringField.value;
 
-  var splitBill = billStringField.split(',');
-for (var i = 0; i<splitBill.length; i++){
-	if (splitBill[i].startsWith('c')){
-  		call = call+1;
-    	}
-  else if(splitBill[i].startsWith('s')){
-          sms = sms+1
-          }
-	}
+  function phoneBill(string){
 
-var total= call*2.75 + sms*0.65;
-return total.toFixed(2);
-}
+  //var billString = string.value;
+  var splitBill = string.split(',');
+  for (var i = 0; i<splitBill.length; i++){
+    var billString = splitBill[i];
+
+  	if (billString === 'call'){
+    		call += 2.75;
+      	}
+
+    if (billString === 'sms'){
+            sms += 0.65
+            }
+          total = call + sms;
+        }
+      }
+
+    function getCall(string){
+      return call.toFixed(2);
+    }
+
+    function getSms(string){
+      return sms.toFixed(2);
+    }
+
+    function myTotal(string){
+      return total.toFixed(2);
+        }
+
+
+
+  return {
+    bill: phoneBill,
+    callTotal: getCall,
+    smsTotal: getSms,
+    iTotal: myTotal,
+    };
+
+};
 
 
 function calculateBtnClicked(){
-    // get the string entered in the textArea
-    var billString = billStringField.value;
-    //round to two decimals
-    var roundedBillTotal = totalPhoneBill(billString);
-    billTotalElement.innerHTML = roundedBillTotal;
-}
-calculateBtnElement.addEventListener('click', (totalPhoneBill));
 
-calculateBtnElement.addEventListener('click', (calculateBtnClicked));
+
+    var roundedBillTotal = thePhoneBill.iTotal();
+    billTotalElement.innerHTML = roundedBillTotal;
+        }
+
+function clearIt (){
+  return billStringField.value = '';
+      }
+
+calculateBtnElement.addEventListener('click', function(){
+//var billText = billStringField.value
+thePhoneBill.bill(stringType())
+//totalPhoneBill();
+calculateBtnClicked();
+clearIt();
+});

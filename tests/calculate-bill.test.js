@@ -1,14 +1,18 @@
 describe ('Calculate-Billl', function(){
-  it ('Should return R3.40',function(){
-
-    assert.equal(totalPhoneBill('call,sms'),3.40);
+  it ('Should return the total of R3.40',function(){
+    var thePhoneBill = totalPhoneBill()
+    thePhoneBill.bill('call,sms')
+    assert.equal(thePhoneBill.iTotal(),3.40);
   });
-  it ('Should return R2.75',function(){
 
-    assert.equal(totalPhoneBill('call'),2.75);
+  it ('Should return the call total of R5.50',function(){
+    var thePhoneBill = totalPhoneBill()
+    thePhoneBill.bill('call,sms,call,sms')
+    assert.equal(thePhoneBill.callTotal(),5.50);
   });
-  it ('Should return R0.65',function(){
-
-    assert.equal(totalPhoneBill('sms'),0.65);
+  it ('Should return the call total of R1.30',function(){
+    var thePhoneBill = totalPhoneBill()
+    thePhoneBill.bill('call,sms,call,sms')
+    assert.equal(thePhoneBill.smsTotal(),1.30);
   });
 });

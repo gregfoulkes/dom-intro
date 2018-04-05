@@ -21,7 +21,7 @@ describe ('CheckTotal for Settings-Bill', function(){
 
   it ('Should return a total of R4.05',function(){
     var checkIt = CheckTotal()
-    
+
     checkIt.smsSet(0.65),
     checkIt.callSet(2.75),
 

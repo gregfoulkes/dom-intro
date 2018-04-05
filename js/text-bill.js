@@ -4,6 +4,7 @@ var callsTotalElem = document.querySelector(".callTotalOne");
 var smsTotalElem = document.querySelector(".smsTotalOne");
 var totalCostElem = document.querySelector(".totalOne");
 var textBillBtn = document.querySelector(".textBillAddBtn")
+
 var checkSum = TotalCheck()
 
 
