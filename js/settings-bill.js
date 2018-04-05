@@ -15,10 +15,6 @@ var criticalLevel = document.querySelector(".criticalLevelSetting")
 var updateSetButton = document.querySelector(".updateSettings")
 var billAddTotalBtn = document.querySelector(".addTotalBillBtn")
 
-//callCost.value = 0
-//smsCost.value = 0
-
-
 
 function CheckTotal(){
 
@@ -46,10 +42,15 @@ function CheckTotal(){
           warnLevel = parseFloat(value)
           return warnLevel
         }
-  // function criticalLevelUpdate(){
-  //         critLevel = parseFloat(value)
-  //         return critLevel
-  //         }
+
+
+
+  function criticalLevelUpdate(value){
+          critLevel = parseFloat(value)
+          return critLevel
+          }
+
+
 
   function billItemCalculate (value){
 
@@ -69,8 +70,16 @@ function CheckTotal(){
   }
 
   function allSms(){
-  return totalSms.toFixed(2)
+    return totalSms.toFixed(2)
   }
+
+  function getCriticalLevelUpdate(){
+      return critLevel
+  }
+
+  function getWarningLevelUpdate(){
+      return warnLevel
+    }
 
 function totalFunction(){
     var costTotal = totalCalls + totalSms;
@@ -81,11 +90,13 @@ function totalFunction(){
       callSet: callUpdate,
       smsSet: smsUpdate,
       updateWarning: warningLevelUpdate,
-      // criticalUpdate: criticalLevelUpdate,
+      updateCritical: criticalLevelUpdate,
       calculate: billItemCalculate,
       call: allCalls,
       sms: allSms,
       total: totalFunction,
+      getCritical: getCriticalLevelUpdate,
+      getWarning: getWarningLevelUpdate,
     }
   }
 
@@ -96,12 +107,12 @@ function UpdateSet(){
 
    var updatedCall = callCost.value;
    var updatedSms = smsCost.value;
-   var updateWarn = warningLevel.value
-   var updateCrit = criticalLevel.value
+   var updateWarn = warningLevel.value;
+   var updateCrit = criticalLevel.value;
    checkAll.callSet(updatedCall);
    checkAll.smsSet(updatedSms);
    checkAll.updateWarning(updateWarn);
-   // checkAll.criticalLevelUpdate(updateCrit);
+   checkAll.updateCritical(updateCrit);
 
 
 }
@@ -121,23 +132,22 @@ function totalDisplay(){
 
     callsTotalSet.innerHTML =  checkAll.call()
     smsTotalSet.innerHTML =   checkAll.sms()
-  //  var totalAll = totalFunction();
     totalCostSet.innerHTML =   checkAll.total()
 }
 
 function totalColourChange(){
-  var finalTotal = checkAll.total()
-  var warningValue = checkAll.updateWarning()
-  //var num = checkTotal.warningLevelUpdate(
+  var finalTotal = checkAll.total();
+  var warningValue = checkAll.getWarning();
+  var criticalValue = checkAll.getCritical();
+
     if (finalTotal > warningValue){
         totalCostSet.classList.add("warning");
     }
-  }
-//
-//     if (costTotal > critLevel){
-//         totalCostSet.classList.add("danger");
-//     }
-// }
+
+    if (finalTotal > criticalValue){
+        totalCostSet.classList.add("danger");
+    }
+}
 
 
 billAddTotalBtn.addEventListener('click', function(){
@@ -149,23 +159,3 @@ totalColourChange();
 updateSetButton.addEventListener('click', function(){
 UpdateSet();
 });
-
- //updateSetButton.addEventListener('click', updateSet)
-
- // function totalColourChange(){
- //     if (costTotal > warnLevel){
- //         totalCostSet.classList.add("warning");
- //     }
- //
- //
- //     if (costTotal > critLevel){
- //         totalCostSet.classList.add("danger");
- //     }
- //
- //
- //
- //
- //
- //        //
- //
- // }
