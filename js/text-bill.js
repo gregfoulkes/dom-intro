@@ -56,10 +56,11 @@ function billAddTotal(){
 }
 
 function colorChange(){
-   if (check.total() >= 50){
+  var billTotal = checkSum.total()
+   if (billTotal >= 50){
        totalCostElem.classList.add("danger");
    }
-   else if (check.total() >= 30){
+   else if (billTotal >= 30){
        totalCostElem.classList.add("warning");
    }
 

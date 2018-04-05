@@ -62,10 +62,11 @@ function totalRadioBill(){
 }
 
 function cssColourChange(){
-   if (check.total() >= 50){
+  var theTotal = checkTotal.total()
+   if (theTotal >= 50){
        totalCostTwo.classList.add("danger");
    }
-   else if (check.total() >= 30){
+   else if (theTotal >= 30){
        totalCostTwo.classList.add("warning");
    }
 }
