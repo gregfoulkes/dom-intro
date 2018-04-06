@@ -68,6 +68,7 @@ function cssColourChange(){
    }
    else if (theTotal >= 30){
        totalCostTwo.classList.add("warning");
+       document.getElementById('AddBtn').disable = true
    }
 }
 

@@ -51,16 +51,27 @@ function totalPhoneBill(){
     bill: phoneBill,
     callTotal: getCall,
     smsTotal: getSms,
-    iTotal: myTotal,
+    firstTotal: myTotal,
     };
 
 };
 
+function ColourChange(){
+  var theTotal = thePhoneBill.firstTotal();
+
+   if (theTotal >= 50){
+       billTotalElement.classList.add("danger");
+   }
+  else if (theTotal >= 30){
+       billTotalElement.classList.add("warning");
+      // document.getElementById('AddBtn').disable = true
+   }
+}
 
 function calculateBtnClicked(){
 
 
-    var roundedBillTotal = thePhoneBill.iTotal();
+    var roundedBillTotal = thePhoneBill.firstTotal();
     billTotalElement.innerHTML = roundedBillTotal;
         }
 
@@ -73,5 +84,6 @@ calculateBtnElement.addEventListener('click', function(){
 thePhoneBill.bill(stringType())
 //totalPhoneBill();
 calculateBtnClicked();
+ColourChange()
 clearIt();
 });

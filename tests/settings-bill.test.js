@@ -31,4 +31,14 @@ describe ('CheckTotal for Settings-Bill', function(){
 
     assert.equal(checkIt.total(), 4.05);
   });
+  it ('Should return the updated sms value of R0.85',function(){
+
+    var checkIt = CheckTotal()
+    assert.equal(checkIt.smsSet(0.85), 0.85);
+  });
+  it ('Should return the updated call value of R3.20',function(){
+
+    var checkIt = CheckTotal()
+    assert.equal(checkIt.callSet(3.20), 3.20);
+  });
 });
