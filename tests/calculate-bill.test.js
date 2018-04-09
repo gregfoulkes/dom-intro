@@ -7,7 +7,7 @@ describe ('Calculate-Billl', function(){
 
     assert.equal(calculateTotal('call'),2.75);
   });
-  it ('Should return R0.65',function(){
+  it ('Should return R0.75',function(){
 
     assert.equal(calculateTotal('sms'),0.75);
   });
