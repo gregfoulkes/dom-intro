@@ -6,7 +6,7 @@ function displayTotal() {
   //var fac = calculateTotal(billValue)
   var billValue = billStringField.value
   var finalTotal = calculateTotal(billValue)
-  billTotalElement.innerHTML = final ;
+  billTotalElement.innerHTML = finalTotal ;
 
      if (finalTotal >= 30){
          billTotalElement.classList.add("danger");
