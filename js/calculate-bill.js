@@ -1,6 +1,3 @@
-var billStringField = document.querySelector(".billString");
-var calculateBtnElement = document.querySelector(".calculateBtn");
-var billTotalElement = document.querySelector(".billTotal");
 
 
 function calculateTotal(billValue){
@@ -21,16 +18,7 @@ function calculateTotal(billValue){
     return billTotal.toFixed(2)
 }
 
- function displayTotal() {
-
-   var billValue = billStringField.value
-   billTotalElement.innerHTML = calculateTotal(billValue);
- }
-
-calculateBtnElement.addEventListener('click', function(){
-displayTotal()
-});
-
+ 
 
 // function calculateBtnClicked(){
 //     // get the string entered in the textArea
