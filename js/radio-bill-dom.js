@@ -26,10 +26,12 @@ function cssColourChange(){
   var theTotal = checkTotal.total()
    if (theTotal >= 50){
        totalCostTwo.classList.add("danger");
+       billAddBtn.disabled = true
+
    }
    else if (theTotal >= 30){
        totalCostTwo.classList.add("warning");
-       document.getElementById('AddBtn').disable = true
+
    }
 }
 

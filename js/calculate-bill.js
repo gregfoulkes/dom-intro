@@ -18,7 +18,7 @@ function calculateTotal(billValue){
     return billTotal.toFixed(2)
 }
 
- 
+
 
 // function calculateBtnClicked(){
 //     // get the string entered in the textArea

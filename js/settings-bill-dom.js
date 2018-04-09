@@ -15,8 +15,8 @@ var criticalLevel = document.querySelector(".criticalLevelSetting")
 var updateSetButton = document.querySelector(".updateSettings")
 var billAddTotalBtn = document.querySelector(".addTotalBillBtn")
 
-callCost.value = 0.00
-smsCost.value = 0.00
+//callCost.value = 0.00
+//smsCost.value = 0.00
 
 var checkAll = CheckTotal();
 
@@ -57,12 +57,14 @@ function totalColourChange(){
   var warningValue = checkAll.getWarning();
   var criticalValue = checkAll.getCritical();
 
-    if (finalTotal > warningValue){
+    if (finalTotal >= warningValue){
         totalCostSet.classList.add("warning");
     }
 
-    if (finalTotal > criticalValue){
+    if (finalTotal >= criticalValue){
         totalCostSet.classList.add("danger");
+        billAddTotalBtn.disabled = true
+
     }
 }
 
