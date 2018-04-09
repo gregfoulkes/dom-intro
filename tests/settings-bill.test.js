@@ -41,4 +41,16 @@ describe ('CheckTotal for Settings-Bill', function(){
     var checkIt = CheckTotal()
     assert.equal(checkIt.callSet(3.20), 3.20);
   });
+  it ('Should return the updated warning level of 20',function(){
+
+    var checkIt = CheckTotal()
+    checkIt.updateWarning(20)
+    assert.equal(checkIt.getWarning(), 20);
+  });
+  it ('Should return the updated critical level of 30',function(){
+
+    var checkIt = CheckTotal()
+    checkIt.updateCritical(30)
+    assert.equal(checkIt.getCritical(), 30);
+  });
 });
