@@ -1,5 +1,5 @@
 describe ('Calculate-Billl', function(){
-  it ('Should return R3.40',function(){
+  it ('Should return R3.50',function(){
 
     assert.equal(calculateTotal('call, sms'),3.50);
   });
