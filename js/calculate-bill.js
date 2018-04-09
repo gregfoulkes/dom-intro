@@ -27,11 +27,8 @@ function calculateTotal(billValue){
    billTotalElement.innerHTML = calculateTotal(billValue);
  }
 
-
 calculateBtnElement.addEventListener('click', function(){
-// splitValueString();
 displayTotal()
-
 });
 
 
