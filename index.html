@@ -24,6 +24,25 @@
 
     </script>
 
+    <script type="text/x-template" class="radioBillTemplate">
+
+      <tr>
+        <td>Call total</td>
+        <td>R<span class="{{callRadioSumClass}}">{{callRadioSum}}</span></td>
+      </tr>
+      <tr>
+        <td>SMS total</td>
+        <td>R<span class="{{smsTotalTwo}}">{{smsRadioSum}}</span></td>
+      </tr>
+      <tr >
+        <td>Total</td>
+        <td class="orange" >R<span class="{{totalRadioSumClass}}">{{totalRadioSum}}</span></td>
+      </tr>
+
+    </script>
+
+
+
   </head>
   <body>
     <div class="container">
@@ -157,19 +176,8 @@
             </div>
             <div class="six columns">
                   <h5>Totals</h5>
-                  <table>
-                    <tr>
-                      <td>Call total</td>
-                      <td>R<span class="callTotalTwo">0.00</span></td>
-                    </tr>
-                    <tr>
-                      <td>SMS total</td>
-                      <td>R<span class="smsTotalTwo">0.00</span></td>
-                    </tr>
-                    <tr >
-                      <td>Total</td>
-                      <td class="orange" >R<span class="totalTwo">0.00</span></td>
-                    </tr>
+                  <table class = 'radioInsert'>
+
                   </table>
             </div>
           </div>

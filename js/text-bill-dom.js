@@ -38,7 +38,6 @@ billBtn.addEventListener('click', function() {
 
   checkSum.calculate(valueType());
   billAddTotal();
-  // colorChange();
   doClear();
 });
 

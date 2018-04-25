@@ -1,8 +1,11 @@
 var billItemType = document.querySelector(".billItemTypeRadio");
 var billAddBtn = document.querySelector(".radioBillAddBtn");
-var callsTotalTwo = document.querySelector(".callTotalTwo");
-var smsTotalTwo = document.querySelector(".smsTotalTwo");
-var totalCostTwo = document.querySelector(".totalTwo");
+
+var templateSource = document.querySelector(".radioBillTemplate").innerHTML;
+
+var textTemplate = Handlebars.compile(templateSource);
+
+var insertDataElem = document.querySelector(".radioInsert");
 
 
 var checkTotal = TotalCheck()
@@ -16,28 +19,36 @@ function btnRadioCheck(){
 }
 
 function totalRadioBill(){
-    callsTotalTwo.innerHTML = checkTotal.callTotal().toFixed(2);
-    smsTotalTwo.innerHTML = checkTotal.smsTotal().toFixed(2);
+  var data = {
+    callRadioSum: checkTotal.callTotal().toFixed(2),
+    smsRadioSum: checkTotal.smsTotal().toFixed(2),
+    totalRadioSum: checkTotal.total().toFixed(2),
+    totalRadioSumClass: 'totalOne ' + checkTotal.changeColor()
 
-    totalCostTwo.innerHTML = checkTotal.total().toFixed(2);
+  };
+  insertDataElem.innerHTML = textTemplate(data);
+
 }
 
-function cssColourChange(){
-  var theTotal = checkTotal.total()
-   if (theTotal >= 50){
-       totalCostTwo.classList.add("danger");
-       billAddBtn.disabled = true
 
-   }
-   else if (theTotal >= 30){
-       totalCostTwo.classList.add("warning");
-
-   }
-}
 
 billAddBtn.addEventListener('click', function(){
 //btnRadioCheck()
 checkTotal.calculate(btnRadioCheck())
 totalRadioBill();
-cssColourChange();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  var radioData = {
+    callRadioSumClass: 'callTotalTwo',
+    smsRadioSumClass: 'smsTotalTwo',
+    totalRadioSumClass: 'totalTwo',
+    callRadioSum: '0.00',
+    smsRadioSum: '0.00',
+    totalRadioSum: '0.00'
+
+  };
+
+  insertDataElem.innerHTML = textTemplate(radioData);
 });
