@@ -1,38 +1,46 @@
-
-
-function TotalCheck(){
-  var  callsTotals = 0;
+function TotalCheck() {
+  var callsTotals = 0;
   var smsTotals = 0;
 
 
-function billCalculate(value){
-  if (value === 'call'){
-    callsTotals += 2.75;
-    console.log('call')
+  function billCalculate(value) {
+    if (value === 'call') {
+      callsTotals += 2.75;
+      console.log('call')
+    }
+    if (value === 'sms') {
+      smsTotals += 0.65;
+    }
+
   }
-  if (value === 'sms'){
-    smsTotals += 0.65;
+
+  function callBill() {
+    return callsTotals;
   }
 
-}
+  function smsBill() {
+    return smsTotals;
+  }
 
-function callBill(value){
-   return callsTotals;
-}
+  function totalTextBill() {
+    var totalCosts = callsTotals + smsTotals;
+    return totalCosts;
+  }
 
-function smsBill(value){
-   return smsTotals;
-}
+  function colorChange() {
+    if (totalTextBill() >= 50) {
+      return 'danger'
+    } else if (totalTextBill() >= 30) {
+      return 'warning'
+    }
 
-function totalTextBill(value){
-  var  totalCosts = callsTotals + smsTotals;
-  return totalCosts;
-}
+  }
 
-return {
-  calculate:  billCalculate,
-  callTotal: callBill,
-  smsTotal: smsBill,
-  total: totalTextBill
+  return {
+    changeColor: colorChange,
+    calculate: billCalculate,
+    callTotal: callBill,
+    smsTotal: smsBill,
+    total: totalTextBill
   };
 }

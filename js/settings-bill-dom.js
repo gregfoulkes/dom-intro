@@ -15,8 +15,8 @@ var criticalLevel = document.querySelector(".criticalLevelSetting")
 var updateSetButton = document.querySelector(".updateSettings")
 var billAddTotalBtn = document.querySelector(".addTotalBillBtn")
 
-callCost.value = 0.00
-smsCost.value = 0.00
+//callCost.value = 0.00
+//smsCost.value = 0.00
 
 var checkAll = CheckTotal();
 

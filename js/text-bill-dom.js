@@ -1,42 +1,58 @@
 var billTypeText = document.querySelector(".billTypeText");
 var billBtn = document.querySelector(".addToBillBtn");
-var callsTotalElem = document.querySelector(".callTotalOne");
-var smsTotalElem = document.querySelector(".smsTotalOne");
-var totalCostElem = document.querySelector(".totalOne");
-var textBillBtn = document.querySelector(".textBillAddBtn")
 
-var checkSum = TotalCheck()
+var textBillBtn = document.querySelector(".textBillAddBtn");
+
+var templateSource = document.querySelector(".textBillTemplate").innerHTML;
+
+var textTemplate = Handlebars.compile(templateSource);
+
+var insertDataElem = document.querySelector(".insertData");
 
 
-function valueType(){
-  return billTypeText.value.trim()
- }
+var checkSum = TotalCheck();
 
- function billAddTotal(){
-     callsTotalElem.innerHTML =checkSum.callTotal().toFixed(2);
-     smsTotalElem.innerHTML = checkSum.smsTotal().toFixed(2);
-     totalCostElem.innerHTML = checkSum.total().toFixed(2);
- }
+function valueType() {
+  return billTypeText.value.trim();
+}
 
- function colorChange(){
-   var billTotal = checkSum.total()
-    if (billTotal >= 50){
-        totalCostElem.classList.add("danger");
-    }
-    else if (billTotal >= 30){
-        totalCostElem.classList.add("warning");
-    }
+function billAddTotal() {
+  var data = {
+    callSum: checkSum.callTotal().toFixed(2),
+    smsSum: checkSum.smsTotal().toFixed(2),
+    totalSum: checkSum.total().toFixed(2),
+    totalSumClass: 'totalOne ' + checkSum.changeColor()
 
- }
+  };
+  insertDataElem.innerHTML = textTemplate(data);
 
- function doClear(){
- return billTypeText.value = '';
- }
+}
 
- billBtn.addEventListener('click', function(){
 
-   checkSum.calculate(valueType());
-   billAddTotal();
-   colorChange();
-   doClear();
-  });
+
+function doClear() {
+  billTypeText.value = '';
+}
+
+billBtn.addEventListener('click', function() {
+
+  checkSum.calculate(valueType());
+  billAddTotal();
+  // colorChange();
+  doClear();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  var callData = {
+    callSumClass: 'callTotalOne',
+    smsSumClass: 'smsTotalOne',
+    totalSumClass: 'totalOne',
+    callSum: '0.00',
+    smsSum: '0.00',
+    totalSum: '0.00'
+
+  };
+
+  insertDataElem.innerHTML = textTemplate(callData);
+});

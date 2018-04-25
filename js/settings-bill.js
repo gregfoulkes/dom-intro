@@ -27,14 +27,10 @@ function CheckTotal(){
           return warnLevel
         }
 
-
-
   function criticalLevelUpdate(value){
           critLevel = parseFloat(value)
           return critLevel
           }
-
-
 
   function billItemCalculate (value){
 
